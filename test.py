@@ -1,3 +1,1117 @@
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+Process SpawnProcess-267:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+Process SpawnProcess-265:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+INFO:     Waiting for child process [6609]
+INFO:     Child process [6609] died
+INFO:     Waiting for child process [6610]
+INFO:     Child process [6610] died
+INFO:     Waiting for child process [6608]
+INFO:     Child process [6608] died
+Process SpawnProcess-268:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+Process SpawnProcess-269:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+INFO:     Waiting for child process [6683]
+INFO:     Child process [6683] died
+INFO:     Waiting for child process [6684]
+INFO:     Child process [6684] died
+Process SpawnProcess-270:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+INFO:     Waiting for child process [6733]
+INFO:     Child process [6733] died
+Process SpawnProcess-272:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+Process SpawnProcess-271:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+Process SpawnProcess-273:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+INFO:     Waiting for child process [6759]
+INFO:     Child process [6759] died
+INFO:     Waiting for child process [6808]
+INFO:     Child process [6808] died
+INFO:     Waiting for child process [6758]
+INFO:     Child process [6758] died
+Process SpawnProcess-274:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+Process SpawnProcess-276:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+Process SpawnProcess-275:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+INFO:     Waiting for child process [6833]
+INFO:     Child process [6833] died
+INFO:     Waiting for child process [6858]
+INFO:     Child process [6858] died
+INFO:     Waiting for child process [6859]
+INFO:     Child process [6859] died
+Process SpawnProcess-277:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+Process SpawnProcess-278:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+Process SpawnProcess-279:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+INFO:     Waiting for child process [6908]
+INFO:     Child process [6908] died
+INFO:     Waiting for child process [6933]
+INFO:     Child process [6933] died
+INFO:     Waiting for child process [6934]
+INFO:     Child process [6934] died
+Process SpawnProcess-280:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+INFO:     Waiting for child process [6983]
+INFO:     Child process [6983] died
+Process SpawnProcess-282:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+Process SpawnProcess-281:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+INFO:     Waiting for child process [7008]
+INFO:     Child process [7008] died
+INFO:     Waiting for child process [7009]
+INFO:     Child process [7009] died
+Process SpawnProcess-283:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+INFO:     Waiting for child process [7058]
+INFO:     Child process [7058] died
+Process SpawnProcess-284:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+Process SpawnProcess-285:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+INFO:     Waiting for child process [7083]
+INFO:     Child process [7083] died
+INFO:     Waiting for child process [7084]
+INFO:     Child process [7084] died
+Process SpawnProcess-286:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+INFO:     Waiting for child process [7133]
+INFO:     Child process [7133] died
+Process SpawnProcess-287:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+Process SpawnProcess-288:
+Traceback (most recent call last):
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/supervisors/multiprocess.py", line 63, in target
+    return self.real_target(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 66, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 70, in serve
+    await self._serve(sockets)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/server.py", line 77, in _serve
+    config.load()
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/config.py", line 435, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/docker/venv/lib/python3.9/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 855, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/home/docker/app/main.py", line 3, in <module>
+    from routes import router
+  File "/home/docker/app/routes/__init__.py", line 3, in <module>
+    from .user import router
+  File "/home/docker/app/routes/user.py", line 10, in <module>
+    job_matcher = JobMatcher()
+  File "/home/docker/app/services/main.py", line 29, in __init__
+    raise ValueError(self.error)
+ValueError: File not found: /home/yaz/specific_job/api/src/static/job_data.csv
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+yaz@gpu:~/specific_job$ docker ps
+CONTAINER ID   IMAGE                                                      COMMAND                  CREATED          STATUS                          PORTS                                                                                                                                       NAMES
+11d4b53c939a   specificjob-api                                            "uvicorn main:app --…"   23 minutes ago   Up 23 minutes                   0.0.0.0:6437->8080/tcp, [::]:6437->8080/tcp                                                                                                 spisficjob-api-1
+ab9daddbb340   confluentinc/cp-kafka:7.5.0                                "/etc/confluent/dock…"   2 hours ago      Up 2 hours                      0.0.0.0:4567->4567/tcp, [::]:4567->4567/tcp, 9092/tcp                                                                                       ivs5-kafka-1
+1a8732f0a46d   confluentinc/cp-zookeeper:7.5.0                            "/etc/confluent/dock…"   2 hours ago      Up 2 hours                      2888/tcp, 3888/tcp, 0.0.0.0:3456->2181/tcp, [::]:3456->2181/tcp                                                                             ivs5-zookeeper-1
+0150c0768bdf   timescale/timescaledb:latest-pg14                          "docker-entrypoint.s…"   2 hours ago      Up 2 hours                      0.0.0.0:5678->5432/tcp, [::]:5678->5432/tcp                                                                                                 timescaledb
+9eb1faa0e9d3   postgres:14                                                "docker-entrypoint.s…"   2 hours ago      Up 2 hours                      0.0.0.0:6789->5432/tcp, [::]:6789->5432/tcp                                                                                                 postgres
+ad2cd5d18841   docker.infogerance.d-fi.fr/nginx-domain:2.9.0              "/docker-entrypoint.…"   7 hours ago      Up 3 hours                      0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp                                                                domain-client-1
+fd0e88ed5362   cvm-api:1.0.0                                              "uvicorn main:app --…"   27 hours ago     Up 3 hours                      0.0.0.0:6438->8080/tcp, [::]:6438->8080/tcp                                                                                                 jobmatch_api
+4320544f2a4e   docker.infogerance.d-fi.fr/opportunity-detector-fe:0.0.1   "dotnet OpportunityD…"   3 days ago       Up 3 hours                      443/tcp, 0.0.0.0:5205->80/tcp, [::]:5205->80/tcp                                                                                            opportunity-detector-fe-1
+e4eed8699610   docker.infogerance.d-fi.fr/opportunity-detector-be:0.0.1   "dotnet OpportunityD…"   3 days ago       Up 3 hours                      443/tcp, 0.0.0.0:5204->80/tcp, [::]:5204->80/tcp                                                                                            opportunity-detector-be-1
+48bf931f9f64   postgres                                                   "docker-entrypoint.s…"   3 days ago       Up 3 hours                      0.0.0.0:5206->5432/tcp, [::]:5206->5432/tcp                                                                                                 opportunity-detector-db-1
+23f7611f0ad0   docker.infogerance.d-fi.fr/meapal-front:1.0.6              "/docker-entrypoint.…"   3 days ago       Up 12 minutes                   0.0.0.0:5144->80/tcp, [::]:5144->80/tcp                                                                                                     meapal-client-1
+7810e5b346b1   project_graduation_api                                     "uvicorn main:app --…"   8 days ago       Up 3 hours                      0.0.0.0:5111->8080/tcp, [::]:5111->8080/tcp                                                                                                 project_toursium
+7bce721ddb6c   voice-api:1.0.0                                            "uvicorn main:app --…"   8 days ago       Up 3 hours                      0.0.0.0:4444->8080/tcp, [::]:4444->8080/tcp                                                                                                 voice_toon_api
+1ef8daa96af3   debezium/debezium-ui:latest                                "/deployments/run-ja…"   2 weeks ago      Up 3 hours                      0.0.0.0:8568->8080/tcp, [::]:8568->8080/tcp                                                                                                 debezium-ui
+5e9aa6cd4123   debezium/connect:3.0.0.Final                               "/docker-entrypoint.…"   2 weeks ago      Up 3 hours (unhealthy)          8778/tcp, 9092/tcp, 0.0.0.0:8093->8083/tcp, [::]:8093->8083/tcp                                                                             debezium
+fa8d230cf079   confluentinc/cp-enterprise-control-center:latest           "/etc/confluent/dock…"   2 weeks ago      Up 3 hours (unhealthy)          0.0.0.0:9321->9021/tcp, [::]:9321->9021/tcp                                                                                                 control-center
+194c62554175   confluentinc/cp-kafka:7.4.0                                "/etc/confluent/dock…"   2 weeks ago      Up 3 hours (healthy)            0.0.0.0:9092->9092/tcp, [::]:9092->9092/tcp, 0.0.0.0:9101->9101/tcp, [::]:9101->9101/tcp, 0.0.0.0:29092->29092/tcp, [::]:29092->29092/tcp   broker
+d2fe1598b7e4   bitnami/spark:latest                                       "/bin/sh -c 'pip ins…"   2 weeks ago      Up 3 hours                                                                                                                                                                  spark-worker
+ee048f667bc8   bitnami/spark:latest                                       "/bin/sh -c 'pip ins…"   2 weeks ago      Up 3 hours                      0.0.0.0:7077->7077/tcp, [::]:7077->7077/tcp, 0.0.0.0:8081->8081/tcp, [::]:8081->8081/tcp                                                    spark-master
+2df05a750140   confluentinc/cp-zookeeper:7.4.0                            "/etc/confluent/dock…"   2 weeks ago      Up 3 hours (healthy)            2888/tcp, 0.0.0.0:2181->2181/tcp, [::]:2181->2181/tcp, 3888/tcp                                                                             zookeeper
+b9d4f0acba57   dpage/pgadmin4:latest                                      "/entrypoint.sh"         2 weeks ago      Up 3 hours                      443/tcp, 0.0.0.0:5050->80/tcp, [::]:5050->80/tcp                                                                                            pgadmin
+bafa3d4a6635   grafana/grafana:latest                                     "/run.sh"                2 weeks ago      Restarting (1) 48 seconds ago                                                                                                                                               grafana
+yaz@gpu:~/specific_job$ 
+
+
+
+version: '3.8'
+
+
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    image: specificjob-api
+    ports:
+      - "6437:8080"
+    volumes:
+      - ./api/src:/home/docker/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 yaz@gpu:~/specific_job$ docker logs spisficjob-api-1
 INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
 INFO:     Started parent process [1]
