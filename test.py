@@ -1,11 +1,11 @@
-yaz@gpu:~/specific_job$ docker compose up id
-no such service: id
-yaz@gpu:~/specific_job$ docher compose up -d
-Command 'docher' not found, did you mean:
-  command 'docker' from snap docker (27.5.1)
-  command 'docker' from deb docker.io (26.1.3-0ubuntu1~24.04.1)
-  command 'docker' from deb podman-docker (4.9.3+ds1-1ubuntu0.2)
-See 'snap info <snapname>' for additional versions.
+yaz@gpu:~/specific_job$ docker compose up -d --build
+WARN[0000] /home/yaz/specific_job/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+[+] Running 1/1
+ ✘ api Error pull access denied for specificjob-api, repository does not exist or may require 'docker login': denied: requested access to the resource is...            1.7s 
+Error response from daemon: pull access denied for specificjob-api, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+yaz@gpu:~/specific_job$ 
+
+
 yaz@gpu:~/specific_job$ ls
 api  docker-compose.yml  README.md
 yaz@gpu:~/specific_job$ cd api
