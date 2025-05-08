@@ -39,15 +39,92 @@ Compose can now delegate builds to bake for better performance.
  > [api runner-image 7/7] COPY ./api/src /home/docker/app:
 ------
 failed to solve: failed to compute cache key: failed to calculate checksum of ref d2d47a88-b07d-466b-8ece-43836925ba61::uoc0pj9gxov0u2pnxawb3zkzz: "/api/src": not found
-yaz@gpu:~/specific_job$ 
+yaz@gpu:~/specific_job$ ls -R ~/specific_job/api
+/home/yaz/specific_job/api:
+dockerfile  Makefile  README.md  requirements.txt  src
 
-yaz@gpu:~/specific_job$ docker compose up -d --build
+/home/yaz/specific_job/api/src:
+config  main.py  __pycache__  routes  schemas  services  static
+
+/home/yaz/specific_job/api/src/config:
+__init__.py  __pycache__  setting.py
+
+/home/yaz/specific_job/api/src/config/__pycache__:
+__init__.cpython-312.pyc  setting.cpython-312.pyc
+
+/home/yaz/specific_job/api/src/__pycache__:
+main.cpython-312.pyc
+
+/home/yaz/specific_job/api/src/routes:
+__init__.py  __pycache__  service.py  user.py
+
+/home/yaz/specific_job/api/src/routes/__pycache__:
+__init__.cpython-312.pyc  user.cpython-312.pyc
+
+/home/yaz/specific_job/api/src/schemas:
+error.py  __init__.py  __pycache__  user.py
+
+/home/yaz/specific_job/api/src/schemas/__pycache__:
+error.cpython-312.pyc  __init__.cpython-312.pyc  user.cpython-312.pyc
+
+/home/yaz/specific_job/api/src/services:
+__init__.py  main.py  __pycache__
+
+/home/yaz/specific_job/api/src/services/__pycache__:
+__init__.cpython-312.pyc  main.cpython-312.pyc
+
+/home/yaz/specific_job/api/src/static:
+job_data.csv
+yaz@gpu:~/specific_job$ cd ~/specific_job
+docker compose down  # Stop and remove any existing containers
+docker compose up -d --build
 WARN[0000] /home/yaz/specific_job/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
-[+] Running 1/1
- ✘ api Error pull access denied for specificjob-api, repository does not exist or may require 'docker login': denied: requested access to the resource is...            1.7s 
-Error response from daemon: pull access denied for specificjob-api, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+WARN[0000] /home/yaz/specific_job/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+Compose can now delegate builds to bake for better performance.
+ To do so, set COMPOSE_BAKE=true.
+[+] Building 382.5s (21/21) FINISHED                                                                                                                          docker:default
+ => [api internal] load build definition from dockerfile                                                                                                                0.0s
+ => => transferring dockerfile: 986B                                                                                                                                    0.0s
+ => [api internal] load metadata for docker.io/library/python:3.9-slim                                                                                                  1.0s
+ => [api internal] load .dockerignore                                                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                                                         0.0s
+ => [api internal] load build context                                                                                                                                   0.0s
+ => => transferring context: 265.23kB                                                                                                                                   0.0s
+ => [api builder-image 1/9] FROM docker.io/library/python:3.9-slim@sha256:bef8d69306a7905f55cd523f5604de1dde45bbf745ba896dbb89f6d15c727170                             14.3s
+ => => resolve docker.io/library/python:3.9-slim@sha256:bef8d69306a7905f55cd523f5604de1dde45bbf745ba896dbb89f6d15c727170                                                0.0s
+ => => sha256:d691b80d5159dfbcf2c1daad72a24c0fb9a55b6d90d6a11dcd46384ff1afa64d 3.51MB / 3.51MB                                                                          4.5s
+ => => sha256:84b1a677eccc72224f1c1f6beece7da2221414861259d64d106a62d9b1f704e0 14.93MB / 14.93MB                                                                       13.6s
+ => => sha256:fb95b45635cb4f373b9afdfb37bc513f1cc179ce6bd32904fb5570188eee2f29 249B / 249B                                                                              0.4s
+ => => sha256:bef8d69306a7905f55cd523f5604de1dde45bbf745ba896dbb89f6d15c727170 10.41kB / 10.41kB                                                                        0.0s
+ => => sha256:c8ecde0b63a4881272d794f7fcf2ba2ed4c0f7594c8d783905423e7e964ade28 1.75kB / 1.75kB                                                                          0.0s
+ => => sha256:9a041530811d5397b63cb7255cdcdd27195706cf5faf81d77242cd01d7a68da8 5.29kB / 5.29kB                                                                          0.0s
+ => => extracting sha256:d691b80d5159dfbcf2c1daad72a24c0fb9a55b6d90d6a11dcd46384ff1afa64d                                                                               0.2s
+ => => extracting sha256:84b1a677eccc72224f1c1f6beece7da2221414861259d64d106a62d9b1f704e0                                                                               0.7s
+ => => extracting sha256:fb95b45635cb4f373b9afdfb37bc513f1cc179ce6bd32904fb5570188eee2f29                                                                               0.0s
+ => [api builder-image 2/9] RUN apt-get update && apt-get install -y --no-install-recommends     build-essential     ffmpeg libavcodec-extra libopus0                 257.1s
+ => [api runner-image 2/7] RUN apt-get update && apt-get install -y --no-install-recommends     ffmpeg libavcodec-extra libopus0                                      202.2s
+ => [api runner-image 3/7] RUN useradd --create-home docker                                                                                                             0.2s
+ => [api builder-image 3/9] RUN pip install --upgrade pip                                                                                                               5.5s
+ => [api builder-image 4/9] RUN pip install nltk                                                                                                                        5.5s
+ => [api builder-image 5/9] RUN python3 -m nltk.downloader punkt                                                                                                       10.1s
+ => [api builder-image 6/9] COPY requirements.txt .                                                                                                                     0.0s
+ => [api builder-image 7/9] RUN pip install --no-cache-dir -r requirements.txt                                                                                         48.0s
+ => [api builder-image 8/9] RUN pip install --no-cache-dir --force-reinstall numpy==1.26.4 pandas==2.2.2                                                               33.8s
+ => [api builder-image 9/9] RUN pip cache purge                                                                                                                         0.5s
+ => [api runner-image 4/7] COPY --from=builder-image /usr/local /usr/local                                                                                              1.8s
+ => [api runner-image 5/7] RUN mkdir /home/docker/app                                                                                                                   0.2s
+ => [api runner-image 6/7] WORKDIR /home/docker/app                                                                                                                     0.0s
+ => [api runner-image 7/7] COPY src /home/docker/app                                                                                                                    0.0s
+ => [api] exporting to image                                                                                                                                            2.6s
+ => => exporting layers                                                                                                                                                 2.6s
+ => => writing image sha256:bc2cf340c2e73690a5c74fc1ddb640c09b991cdc88be8e419aeff85b38d782ba                                                                            0.0s
+ => => naming to docker.io/library/specificjob-api                                                                                                                      0.0s
+ => [api] resolving provenance for metadata file                                                                                                                        0.0s
+[+] Running 3/3
+ ✔ api                         Built                                                                                                                                    0.0s 
+ ✔ Network spisficjob_default  Created                                                                                                                                  0.0s 
+ ✔ Container spisficjob-api-1  Started                                                                                                                                  0.3s 
 yaz@gpu:~/specific_job$ 
-
 
 yaz@gpu:~/specific_job$ ls
 api  docker-compose.yml  README.md
