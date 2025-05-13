@@ -1,0 +1,21 @@
+services:
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8906:7410"
+    environment:
+      - AVATAR_URL=${AVATAR_URL}
+      - CHROMA_DIR=${CHROMA_DIR}
+      - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY}
+      - ELEVENLABS_VOICE_ID=${ELEVENLABS_VOICE_ID}
+      - OLLAMA_HOST=http://172.17.0.1:11435
+    volumes:
+      - ./docs/chroma:/app/docs/chroma
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
