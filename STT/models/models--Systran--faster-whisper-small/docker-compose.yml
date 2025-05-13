@@ -1,0 +1,11 @@
+services:
+  api:
+    image: sttapi:1.0.0
+    ports:
+      - ${BACKEND_PORT:-4004}:4004
+    env_file:
+      - .env
+    command: sh -c "uvicorn routes.user:app --host 0.0.0.0 --port 4004"
+    network_mode: bridge
+    volumes:
+      - /home/yaz/tak/GP/STT/models:/home/docker/app/models:ro
