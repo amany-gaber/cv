@@ -23,4 +23,30 @@ Compose can now delegate builds to bake for better performance.
  > [avatar-app  5/12] COPY ./app /home/docker/app:
 ------
 failed to solve: failed to compute cache key: failed to calculate checksum of ref d2d47a88-b07d-466b-8ece-43836925ba61::y8owu6p643if5lxt3z24h8o1u: "/app": not found
-yaz@gpu:~/tak/GP/AVATAR$ 
+yaz@gpu:~/tak/GP/AVATAR$ ls
+API.py  docker-compose.yml  inference.py  lipsync_test.py  requirements.txt  videos   Wav2Lip_inference_patched.py
+cache   dockerfile          lipsync.py    __pycache__      source            Wav2Lip  weights
+yaz@gpu:~/tak/GP/AVATAR$ cd videos
+yaz@gpu:~/tak/GP/AVATAR/videos$ ls
+yaz@gpu:~/tak/GP/AVATAR/videos$ cd ..
+yaz@gpu:~/tak/GP/AVATAR$ cd source
+yaz@gpu:~/tak/GP/AVATAR/source$ ls
+audio.wav  final.mp4
+yaz@gpu:~/tak/GP/AVATAR/source$ cd ..
+yaz@gpu:~/tak/GP/AVATAR$ cd Wav2Lip
+yaz@gpu:~/tak/GP/AVATAR/Wav2Lip$ ls
+audio.py     color_syncnet_train.py  face_detection  hparams.py           inference.py       models         __pycache__  requirements.txt  temp
+checkpoints  evaluation              filelists       hq_wav2lip_train.py  inference.py.save  preprocess.py  README.md    results           wav2lip_train.py
+yaz@gpu:~/tak/GP/AVATAR/Wav2Lip$ cd ..
+yaz@gpu:~/tak/GP/AVATAR$ cd Wav2Lip
+yaz@gpu:~/tak/GP/AVATAR/Wav2Lip$ ls
+audio.py     color_syncnet_train.py  face_detection  hparams.py           inference.py       models         __pycache__  requirements.txt  temp
+checkpoints  evaluation              filelists       hq_wav2lip_train.py  inference.py.save  preprocess.py  README.md    results           wav2lip_train.py
+yaz@gpu:~/tak/GP/AVATAR/Wav2Lip$ cd face_detection
+yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/face_detection$ ls
+api.py  detection  __init__.py  models.py  __pycache__  README.md  utils.py
+yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/face_detection$ cd ..
+yaz@gpu:~/tak/GP/AVATAR/Wav2Lip$ cd models
+yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/models$ ls
+conv.py  __init__.py  __pycache__  syncnet.py  wav2lip.py
+yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/models$ 
