@@ -1,3 +1,34 @@
+from os import listdir, path
+import scipy, cv2, os, sys, argparse, audio
+import numpy as np
+import json, subprocess, random, string
+from tqdm import tqdm
+from glob import glob
+import torch, face_detection
+from models import Wav2Lip
+import platform
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Use NVIDIA base image for GPU support with CUDA 11.6.2 (since 11.8.0 not found)
 FROM nvidia/cuda:11.6.2-cudnn8-runtime-ubuntu20.04
 
