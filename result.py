@@ -1,528 +1,285 @@
-from os import listdir, path
-import scipy, cv2, os, sys, argparse, audio
+import cv2, os, argparse, audio
 import numpy as np
-import json, subprocess, random, string
+import subprocess
 from tqdm import tqdm
-from glob import glob
 import torch, face_detection
 from models import Wav2Lip
 import platform
 
 
-
-
-
-
-fastapi==0.115.0
-uvicorn==0.32.0
-gunicorn==23.0.0
-pydantic==2.9.2
-librosa==0.10.2
-numpy==1.26.4
-opencv-python==4.10.0.84
-opencv-contrib-python==4.10.0.84
-torch==2.4.1
-torchvision==0.19.1
-python-multipart==0.0.12
-#numpy==1.17.1
-
-scipy
-sys
-random
-string
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Use NVIDIA base image for GPU support with CUDA 11.6.2 (since 11.8.0 not found)
-FROM nvidia/cuda:11.6.2-cudnn8-runtime-ubuntu20.04
-
-# Install dependencies for adding a new PPA
-RUN apt-get update && apt-get install -y \
-    software-properties-common \
-    && rm -rf /var/lib/apt/lists/*
-
-# Add deadsnakes PPA for Python 3.10
-RUN add-apt-repository ppa:deadsnakes/ppa -y
-
-# Install Python 3.10 and dependencies
-RUN apt-get update && apt-get install -y \
-    python3.10 \
-    python3.10-venv \
-    python3.10-distutils \
-    python3-pip \
-    ffmpeg \
-    && rm -rf /var/lib/apt/lists/*
-
-# Set Python 3.10 as default
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1
-
-# Install pip for Python 3.10
-RUN python3.10 -m ensurepip --upgrade
-RUN python3.10 -m pip install --upgrade pip
-
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
-# Create a non-root user 'docker'
-RUN useradd -m -s /bin/bash docker
-
-# Set working directory
-WORKDIR /home/docker
-
-# Create directories
-RUN mkdir -p /home/docker/Wav2Lip /home/docker/source /home/docker/videos /home/docker/weights
-
-# Copy project files
-COPY API.py inference.py lipsync.py lipsync_test.py Wav2Lip_inference_patched.py requirements.txt /home/docker/
-COPY Wav2Lip/ /home/docker/Wav2Lip/
-COPY source/ /home/docker/source/
-COPY weights/ /home/docker/weights/
-
-# Change ownership to docker user
-RUN chown -R docker:docker /home/docker
-
-# Switch to docker user
-USER docker
-
-# Create virtual environment
-RUN python3 -m venv /home/docker/venv
-
-# Upgrade pip and install dependencies
-RUN /home/docker/venv/bin/pip install --no-cache-dir --upgrade pip
-RUN /home/docker/venv/bin/pip install --no-cache-dir -r requirements.txt
-
-# Install numpy explicitly to ensure it's installed
-RUN /home/docker/venv/bin/pip install --no-cache-dir numpy==1.26.4
-
-# Install gunicorn explicitly
-RUN /home/docker/venv/bin/pip install --no-cache-dir gunicorn
-
-# Switch to root to set permissions
-USER root
-RUN chown -R docker:docker /home/docker /home/docker/venv
-RUN chmod -R u+rwX /home/docker /home/docker/venv
-
-# Switch back to docker user
-USER docker
-
-# Expose port
-EXPOSE 8000
-
-# Command to run the FastAPI application with gunicorn and uvicorn workers with debug logging
-CMD ["/home/docker/venv/bin/gunicorn", "--log-level", "debug", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "-b", "0.0.0.0:8000", "API:app"]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-yaz@gpu:~/tak/GP/AVATAR$ docker compose up -d
-[+] Running 1/1
- ✔ Container avatar-avatar-app-1  Started                                                                                                                               0.4s 
-yaz@gpu:~/tak/GP/AVATAR$ docker compose logs
-avatar-app-1  | 
-avatar-app-1  | ==========
-avatar-app-1  | == CUDA ==
-avatar-app-1  | ==========
-avatar-app-1  | 
-avatar-app-1  | CUDA Version 11.6.2
-avatar-app-1  | 
-avatar-app-1  | Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-avatar-app-1  | 
-avatar-app-1  | This container image and its contents are governed by the NVIDIA Deep Learning Container License.
-avatar-app-1  | By pulling and using the container, you accept the terms and conditions of this license:
-avatar-app-1  | https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
-avatar-app-1  | 
-avatar-app-1  | A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
-avatar-app-1  | 
-avatar-app-1  | [2025-05-16 19:28:49 +0000] [1] [DEBUG] Current configuration:
-avatar-app-1  |   config: ./gunicorn.conf.py
-avatar-app-1  |   wsgi_app: None
-avatar-app-1  |   bind: ['0.0.0.0:8000']
-avatar-app-1  |   backlog: 2048
-avatar-app-1  |   workers: 4
-avatar-app-1  |   worker_class: uvicorn.workers.UvicornWorker
-avatar-app-1  |   threads: 1
-avatar-app-1  |   worker_connections: 1000
-avatar-app-1  |   max_requests: 0
-avatar-app-1  |   max_requests_jitter: 0
-avatar-app-1  |   timeout: 30
-avatar-app-1  |   graceful_timeout: 30
-avatar-app-1  |   keepalive: 2
-avatar-app-1  |   limit_request_line: 4094
-avatar-app-1  |   limit_request_fields: 100
-avatar-app-1  |   limit_request_field_size: 8190
-avatar-app-1  |   reload: False
-avatar-app-1  |   reload_engine: auto
-avatar-app-1  |   reload_extra_files: []
-avatar-app-1  |   spew: False
-avatar-app-1  |   check_config: False
-avatar-app-1  |   print_config: False
-avatar-app-1  |   preload_app: False
-avatar-app-1  |   sendfile: None
-avatar-app-1  |   reuse_port: False
-avatar-app-1  |   chdir: /home/docker
-avatar-app-1  |   daemon: False
-avatar-app-1  |   raw_env: []
-avatar-app-1  |   pidfile: None
-avatar-app-1  |   worker_tmp_dir: None
-avatar-app-1  |   user: 1000
-avatar-app-1  |   group: 1000
-avatar-app-1  |   umask: 0
-avatar-app-1  |   initgroups: False
-avatar-app-1  |   tmp_upload_dir: None
-avatar-app-1  |   secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
-avatar-app-1  |   forwarded_allow_ips: ['127.0.0.1', '::1']
-avatar-app-1  |   accesslog: None
-avatar-app-1  |   disable_redirect_access_to_syslog: False
-avatar-app-1  |   access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
-avatar-app-1  |   errorlog: -
-avatar-app-1  |   loglevel: debug
-avatar-app-1  |   capture_output: False
-avatar-app-1  |   logger_class: gunicorn.glogging.Logger
-avatar-app-1  |   logconfig: None
-avatar-app-1  |   logconfig_dict: {}
-avatar-app-1  |   logconfig_json: None
-avatar-app-1  |   syslog_addr: udp://localhost:514
-avatar-app-1  |   syslog: False
-avatar-app-1  |   syslog_prefix: None
-avatar-app-1  |   syslog_facility: user
-avatar-app-1  |   enable_stdio_inheritance: False
-avatar-app-1  |   statsd_host: None
-avatar-app-1  |   dogstatsd_tags: 
-avatar-app-1  |   statsd_prefix: 
-avatar-app-1  |   proc_name: None
-avatar-app-1  |   default_proc_name: API:app
-avatar-app-1  |   pythonpath: None
-avatar-app-1  |   paste: None
-avatar-app-1  |   on_starting: <function OnStarting.on_starting at 0x76e17150e440>
-avatar-app-1  |   on_reload: <function OnReload.on_reload at 0x76e17150e560>
-avatar-app-1  |   when_ready: <function WhenReady.when_ready at 0x76e17150e680>
-avatar-app-1  |   pre_fork: <function Prefork.pre_fork at 0x76e17150e7a0>
-avatar-app-1  |   post_fork: <function Postfork.post_fork at 0x76e17150e8c0>
-avatar-app-1  |   post_worker_init: <function PostWorkerInit.post_worker_init at 0x76e17150e9e0>
-avatar-app-1  |   worker_int: <function WorkerInt.worker_int at 0x76e17150eb00>
-avatar-app-1  |   worker_abort: <function WorkerAbort.worker_abort at 0x76e17150ec20>
-avatar-app-1  |   pre_exec: <function PreExec.pre_exec at 0x76e17150ed40>
-avatar-app-1  |   pre_request: <function PreRequest.pre_request at 0x76e17150ee60>
-avatar-app-1  |   post_request: <function PostRequest.post_request at 0x76e17150eef0>
-avatar-app-1  |   child_exit: <function ChildExit.child_exit at 0x76e17150f010>
-avatar-app-1  |   worker_exit: <function WorkerExit.worker_exit at 0x76e17150f130>
-avatar-app-1  |   nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x76e17150f250>
-avatar-app-1  |   on_exit: <function OnExit.on_exit at 0x76e17150f370>
-avatar-app-1  |   ssl_context: <function NewSSLContext.ssl_context at 0x76e17150f490>
-avatar-app-1  |   proxy_protocol: False
-avatar-app-1  |   proxy_allow_ips: ['127.0.0.1', '::1']
-avatar-app-1  |   keyfile: None
-avatar-app-1  |   certfile: None
-avatar-app-1  |   ssl_version: 2
-avatar-app-1  |   cert_reqs: 0
-avatar-app-1  |   ca_certs: None
-avatar-app-1  |   suppress_ragged_eofs: True
-avatar-app-1  |   do_handshake_on_connect: False
-avatar-app-1  |   ciphers: None
-avatar-app-1  |   raw_paste_global_conf: []
-avatar-app-1  |   permit_obsolete_folding: False
-avatar-app-1  |   strip_header_spaces: False
-avatar-app-1  |   permit_unconventional_http_method: False
-avatar-app-1  |   permit_unconventional_http_version: False
-avatar-app-1  |   casefold_http_method: False
-avatar-app-1  |   forwarder_headers: ['SCRIPT_NAME', 'PATH_INFO']
-avatar-app-1  |   header_map: drop
-avatar-app-1  | [2025-05-16 19:28:49 +0000] [1] [INFO] Starting gunicorn 23.0.0
-avatar-app-1  | [2025-05-16 19:28:49 +0000] [1] [DEBUG] Arbiter booted
-avatar-app-1  | [2025-05-16 19:28:49 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
-avatar-app-1  | [2025-05-16 19:28:49 +0000] [1] [INFO] Using worker: uvicorn.workers.UvicornWorker
-avatar-app-1  | [2025-05-16 19:28:49 +0000] [27] [INFO] Booting worker with pid: 27
-avatar-app-1  | [2025-05-16 19:28:49 +0000] [28] [INFO] Booting worker with pid: 28
-avatar-app-1  | [2025-05-16 19:28:49 +0000] [29] [INFO] Booting worker with pid: 29
-avatar-app-1  | [2025-05-16 19:28:49 +0000] [30] [INFO] Booting worker with pid: 30
-avatar-app-1  | [2025-05-16 19:28:49 +0000] [1] [DEBUG] 4 workers
-avatar-app-1  | [2025-05-16 19:28:49 +0000] [27] [INFO] Started server process [27]
-avatar-app-1  | [2025-05-16 19:28:49 +0000] [27] [INFO] Waiting for application startup.
-avatar-app-1  | [2025-05-16 19:28:49 +0000] [27] [INFO] Application startup complete.
-avatar-app-1  | [2025-05-16 19:28:50 +0000] [28] [INFO] Started server process [28]
-avatar-app-1  | [2025-05-16 19:28:50 +0000] [28] [INFO] Waiting for application startup.
-avatar-app-1  | [2025-05-16 19:28:50 +0000] [28] [INFO] Application startup complete.
-avatar-app-1  | [2025-05-16 19:28:50 +0000] [30] [INFO] Started server process [30]
-avatar-app-1  | [2025-05-16 19:28:50 +0000] [30] [INFO] Waiting for application startup.
-avatar-app-1  | [2025-05-16 19:28:50 +0000] [30] [INFO] Application startup complete.
-avatar-app-1  | [2025-05-16 19:28:50 +0000] [29] [INFO] Started server process [29]
-avatar-app-1  | [2025-05-16 19:28:50 +0000] [29] [INFO] Waiting for application startup.
-avatar-app-1  | [2025-05-16 19:28:50 +0000] [29] [INFO] Application startup complete.
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [1] [INFO] Handling signal: term
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [27] [INFO] Shutting down
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [29] [INFO] Shutting down
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [30] [INFO] Shutting down
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [28] [INFO] Shutting down
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [27] [INFO] Waiting for application shutdown.
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [27] [INFO] Application shutdown complete.
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [27] [INFO] Finished server process [27]
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [1] [ERROR] Worker (pid:27) was sent SIGTERM!
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [29] [INFO] Waiting for application shutdown.
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [29] [INFO] Application shutdown complete.
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [29] [INFO] Finished server process [29]
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [30] [INFO] Waiting for application shutdown.
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [30] [INFO] Application shutdown complete.
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [30] [INFO] Finished server process [30]
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [1] [ERROR] Worker (pid:29) was sent SIGTERM!
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [1] [ERROR] Worker (pid:30) was sent SIGTERM!
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [28] [INFO] Waiting for application shutdown.
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [28] [INFO] Application shutdown complete.
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [28] [INFO] Finished server process [28]
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [1] [ERROR] Worker (pid:28) was sent SIGTERM!
-avatar-app-1  | [2025-05-16 19:29:54 +0000] [1] [INFO] Shutting down: Master
-avatar-app-1  | 
-avatar-app-1  | ==========
-avatar-app-1  | == CUDA ==
-avatar-app-1  | ==========
-avatar-app-1  | 
-avatar-app-1  | CUDA Version 11.6.2
-avatar-app-1  | 
-avatar-app-1  | Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-avatar-app-1  | 
-avatar-app-1  | This container image and its contents are governed by the NVIDIA Deep Learning Container License.
-avatar-app-1  | By pulling and using the container, you accept the terms and conditions of this license:
-avatar-app-1  | https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
-avatar-app-1  | 
-avatar-app-1  | A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
-avatar-app-1  | 
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [1] [DEBUG] Current configuration:
-avatar-app-1  |   config: ./gunicorn.conf.py
-avatar-app-1  |   wsgi_app: None
-avatar-app-1  |   bind: ['0.0.0.0:8000']
-avatar-app-1  |   backlog: 2048
-avatar-app-1  |   workers: 4
-avatar-app-1  |   worker_class: uvicorn.workers.UvicornWorker
-avatar-app-1  |   threads: 1
-avatar-app-1  |   worker_connections: 1000
-avatar-app-1  |   max_requests: 0
-avatar-app-1  |   max_requests_jitter: 0
-avatar-app-1  |   timeout: 30
-avatar-app-1  |   graceful_timeout: 30
-avatar-app-1  |   keepalive: 2
-avatar-app-1  |   limit_request_line: 4094
-avatar-app-1  |   limit_request_fields: 100
-avatar-app-1  |   limit_request_field_size: 8190
-avatar-app-1  |   reload: False
-avatar-app-1  |   reload_engine: auto
-avatar-app-1  |   reload_extra_files: []
-avatar-app-1  |   spew: False
-avatar-app-1  |   check_config: False
-avatar-app-1  |   print_config: False
-avatar-app-1  |   preload_app: False
-avatar-app-1  |   sendfile: None
-avatar-app-1  |   reuse_port: False
-avatar-app-1  |   chdir: /home/docker
-avatar-app-1  |   daemon: False
-avatar-app-1  |   raw_env: []
-avatar-app-1  |   pidfile: None
-avatar-app-1  |   worker_tmp_dir: None
-avatar-app-1  |   user: 1000
-avatar-app-1  |   group: 1000
-avatar-app-1  |   umask: 0
-avatar-app-1  |   initgroups: False
-avatar-app-1  |   tmp_upload_dir: None
-avatar-app-1  |   secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
-avatar-app-1  |   forwarded_allow_ips: ['127.0.0.1', '::1']
-avatar-app-1  |   accesslog: None
-avatar-app-1  |   disable_redirect_access_to_syslog: False
-avatar-app-1  |   access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
-avatar-app-1  |   errorlog: -
-avatar-app-1  |   loglevel: debug
-avatar-app-1  |   capture_output: False
-avatar-app-1  |   logger_class: gunicorn.glogging.Logger
-avatar-app-1  |   logconfig: None
-avatar-app-1  |   logconfig_dict: {}
-avatar-app-1  |   logconfig_json: None
-avatar-app-1  |   syslog_addr: udp://localhost:514
-avatar-app-1  |   syslog: False
-avatar-app-1  |   syslog_prefix: None
-avatar-app-1  |   syslog_facility: user
-avatar-app-1  |   enable_stdio_inheritance: False
-avatar-app-1  |   statsd_host: None
-avatar-app-1  |   dogstatsd_tags: 
-avatar-app-1  |   statsd_prefix: 
-avatar-app-1  |   proc_name: None
-avatar-app-1  |   default_proc_name: API:app
-avatar-app-1  |   pythonpath: None
-avatar-app-1  |   paste: None
-avatar-app-1  |   on_starting: <function OnStarting.on_starting at 0x717c05132440>
-avatar-app-1  |   on_reload: <function OnReload.on_reload at 0x717c05132560>
-avatar-app-1  |   when_ready: <function WhenReady.when_ready at 0x717c05132680>
-avatar-app-1  |   pre_fork: <function Prefork.pre_fork at 0x717c051327a0>
-avatar-app-1  |   post_fork: <function Postfork.post_fork at 0x717c051328c0>
-avatar-app-1  |   post_worker_init: <function PostWorkerInit.post_worker_init at 0x717c051329e0>
-avatar-app-1  |   worker_int: <function WorkerInt.worker_int at 0x717c05132b00>
-avatar-app-1  |   worker_abort: <function WorkerAbort.worker_abort at 0x717c05132c20>
-avatar-app-1  |   pre_exec: <function PreExec.pre_exec at 0x717c05132d40>
-avatar-app-1  |   pre_request: <function PreRequest.pre_request at 0x717c05132e60>
-avatar-app-1  |   post_request: <function PostRequest.post_request at 0x717c05132ef0>
-avatar-app-1  |   child_exit: <function ChildExit.child_exit at 0x717c05133010>
-avatar-app-1  |   worker_exit: <function WorkerExit.worker_exit at 0x717c05133130>
-avatar-app-1  |   nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x717c05133250>
-avatar-app-1  |   on_exit: <function OnExit.on_exit at 0x717c05133370>
-avatar-app-1  |   ssl_context: <function NewSSLContext.ssl_context at 0x717c05133490>
-avatar-app-1  |   proxy_protocol: False
-avatar-app-1  |   proxy_allow_ips: ['127.0.0.1', '::1']
-avatar-app-1  |   keyfile: None
-avatar-app-1  |   certfile: None
-avatar-app-1  |   ssl_version: 2
-avatar-app-1  |   cert_reqs: 0
-avatar-app-1  |   ca_certs: None
-avatar-app-1  |   suppress_ragged_eofs: True
-avatar-app-1  |   do_handshake_on_connect: False
-avatar-app-1  |   ciphers: None
-avatar-app-1  |   raw_paste_global_conf: []
-avatar-app-1  |   permit_obsolete_folding: False
-avatar-app-1  |   strip_header_spaces: False
-avatar-app-1  |   permit_unconventional_http_method: False
-avatar-app-1  |   permit_unconventional_http_version: False
-avatar-app-1  |   casefold_http_method: False
-avatar-app-1  |   forwarder_headers: ['SCRIPT_NAME', 'PATH_INFO']
-avatar-app-1  |   header_map: drop
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [1] [INFO] Starting gunicorn 23.0.0
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [1] [DEBUG] Arbiter booted
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [1] [INFO] Using worker: uvicorn.workers.UvicornWorker
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [27] [INFO] Booting worker with pid: 27
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [28] [INFO] Booting worker with pid: 28
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [29] [INFO] Booting worker with pid: 29
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [30] [INFO] Booting worker with pid: 30
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [1] [DEBUG] 4 workers
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [27] [INFO] Started server process [27]
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [27] [INFO] Waiting for application startup.
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [27] [INFO] Application startup complete.
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [28] [INFO] Started server process [28]
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [28] [INFO] Waiting for application startup.
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [28] [INFO] Application startup complete.
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [29] [INFO] Started server process [29]
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [29] [INFO] Waiting for application startup.
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [29] [INFO] Application startup complete.
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [30] [INFO] Started server process [30]
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [30] [INFO] Waiting for application startup.
-avatar-app-1  | [2025-05-16 19:30:12 +0000] [30] [INFO] Application startup complete.
-yaz@gpu:~/tak/GP/AVATAR$ ls
-API.py  docker-compose.yml  inference.py  lipsync_test.py  requirements.txt  videos   Wav2Lip_inference_patched.py
-cache   dockerfile          lipsync.py    __pycache__      source            Wav2Lip  weights
-yaz@gpu:~/tak/GP/AVATAR$ cd videos
-yaz@gpu:~/tak/GP/AVATAR/videos$ ls
-yaz@gpu:~/tak/GP/AVATAR/videos$ cd ..
-yaz@gpu:~/tak/GP/AVATAR$ cd cache
-yaz@gpu:~/tak/GP/AVATAR/cache$ ls
-final.mp4.pk
-yaz@gpu:~/tak/GP/AVATAR/cache$ cd ..
-yaz@gpu:~/tak/GP/AVATAR$ cd source
-yaz@gpu:~/tak/GP/AVATAR/source$ ls
-audio.wav  final.mp4
-yaz@gpu:~/tak/GP/AVATAR/source$ cd ..
-yaz@gpu:~/tak/GP/AVATAR$ cd Wav2Lip
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip$ ls
-audio.py     color_syncnet_train.py  face_detection  hparams.py           inference.py       models         __pycache__  requirements.txt  temp
-checkpoints  evaluation              filelists       hq_wav2lip_train.py  inference.py.save  preprocess.py  README.md    results           wav2lip_train.py
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip$ cd face_detection
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/face_detection$ ls
-api.py  detection  __init__.py  models.py  __pycache__  README.md  utils.py
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/face_detection$ cd detection
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/face_detection/detection$ ls
-core.py  __init__.py  __pycache__  sfd
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/face_detection/detection$ cd sfd
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/face_detection/detection/sfd$ ls
-bbox.py  detect.py  __init__.py  net_s3fd.py  __pycache__  sfd_detector.py
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/face_detection/detection/sfd$ cd ..
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/face_detection/detection$ 
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/face_detection/detection$ cd ..
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/face_detection$ cd ..
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip$ ls
-audio.py     color_syncnet_train.py  face_detection  hparams.py           inference.py       models         __pycache__  requirements.txt  temp
-checkpoints  evaluation              filelists       hq_wav2lip_train.py  inference.py.save  preprocess.py  README.md    results           wav2lip_train.py
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip$ cd models
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/models$ ls
-conv.py  __init__.py  __pycache__  syncnet.py  wav2lip.py
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/models$ cd ..
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip$ cd temp
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/temp$ ls
-README.md
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/temp$ cd ..
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip$ cd evaluation
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/evaluation$ ls
-gen_videos_from_filelist.py  README.md  real_videos_inference.py  scores_LSE  test_filelists
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/evaluation$ cd source_LSE
-bash: cd: source_LSE: No such file or directory
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/evaluation$ cd scores_LSE
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/evaluation/scores_LSE$ LS
-LS: command not found
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/evaluation/scores_LSE$ ls
-calculate_scores_LRS.py  calculate_scores_real_videos.py  calculate_scores_real_videos.sh  SyncNetInstance_calc_scores.py
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/evaluation/scores_LSE$ cd ..
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/evaluation$ cd ..
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip$ ls
-audio.py     color_syncnet_train.py  face_detection  hparams.py           inference.py       models         __pycache__  requirements.txt  temp
-checkpoints  evaluation              filelists       hq_wav2lip_train.py  inference.py.save  preprocess.py  README.md    results           wav2lip_train.py
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip$ cd results
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/results$ ls
-README.md
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip/results$ cd ..
-yaz@gpu:~/tak/GP/AVATAR/Wav2Lip$ cd ..
-yaz@gpu:~/tak/GP/AVATAR$ ls
-API.py  docker-compose.yml  inference.py  lipsync_test.py  requirements.txt  videos   Wav2Lip_inference_patched.py
-cache   dockerfile          lipsync.py    __pycache__      source            Wav2Lip  weights
-yaz@gpu:~/tak/GP/AVATAR$ cd weights
-yaz@gpu:~/tak/GP/AVATAR/weights$ ls
-wav2lip.pth
-yaz@gpu:~/tak/GP/AVATAR/weights$ cd ..
-yaz@gpu:~/tak/GP/AVATAR$ 
-
-
-----------------------------------------------------------------
-when I test on swagger with wav sound or opus 
-                                                               the result is Error: Internal Server Error
-Response body
-
-{
-  "error": "Wav2Lip failed: Traceback (most recent call last):\n  File \"/home/docker/Wav2Lip/inference.py\", line 2, in <module>\n    import numpy as np\nModuleNotFoundError: No module named 'numpy'\n"
-}
-
-
-
-
-
-
-tell me t=what do you want to solve this problem 
-                                                               ask if you want on anything like any file content that will help to solve the problem 
-but note that this docker file build the api corret so try to keep it works also okay ?
-
-
-
-
-
-
+parser = argparse.ArgumentParser(description='Inference code to lip-sync videos in the wild using Wav2Lip models')
+
+parser.add_argument('--checkpoint_path', type=str, 
+                    help='Name of saved checkpoint to load weights from', required=True)
+
+parser.add_argument('--face', type=str, 
+                    help='Filepath of video/image that contains faces to use', required=True)
+parser.add_argument('--aubbdio', type=str, 
+                    help='Filepath of video/audio file to use as raw audio source', required=True)
+parser.add_argument('--outfile', type=str, help='Video path to save result. See default for an e.g.', 
+                                default='results/result_voice.mp4')
+
+parser.add_argument('--static', type=bool, 
+                    help='If True, then use only first video frame for inference', default=False)
+parser.add_argument('--fps', type=float, help='Can be specified only if input is a static image (default: 25)', 
+                    default=25., required=False)
+
+parser.add_argument('--pads', nargs='+', type=int, default=[0, 10, 0, 0], 
+                    help='Padding (top, bottom, left, right). Please adjust to include chin at least')
+
+parser.add_argument('--face_det_batch_size', type=int, 
+                    help='Batch size for face detection', default=16)
+parser.add_argument('--wav2lip_batch_size', type=int, help='Batch size for Wav2Lip model(s)', default=128)
+
+parser.add_argument('--resize_factor', default=1, type=int, 
+            help='Reduce the resolution by this factor. Sometimes, best results are obtained at 480p or 720p')
+
+parser.add_argument('--crop', nargs='+', type=int, default=[0, -1, 0, -1], 
+                    help='Crop video to a smaller region (top, bottom, left, right). Applied after resize_factor and rotate arg. ' 
+                    'Useful if multiple face present. -1 implies the value will be auto-inferred based on height, width')
+
+parser.add_argument('--box', nargs='+', type=int, default=[-1, -1, -1, -1], 
+                    help='Specify a constant bounding box for the face. Use only as a last resort if the face is not detected.'
+                    'Also, might work only if the face is not moving around much. Syntax: (top, bottom, left, right).')
+
+parser.add_argument('--rotate', default=False, action='store_true',
+                    help='Sometimes videos taken from a phone can be flipped 90deg. If true, will flip video right by 90deg.'
+                    'Use if you get a flipped result, despite feeding a normal looking video')
+
+parser.add_argument('--nosmooth', default=False, action='store_true',
+                    help='Prevent smoothing face detections over a short temporal window')
+
+args = parser.parse_args()
+args.img_size = 96
+
+if os.path.isfile(args.face) and args.face.split('.')[1] in ['jpg', 'png', 'jpeg']:
+    args.static = True
+
+def get_smoothened_boxes(boxes, T):
+    for i in range(len(boxes)):
+        if i + T > len(boxes):
+            window = boxes[len(boxes) - T:]
+        else:
+            window = boxes[i : i + T]
+        boxes[i] = np.mean(window, axis=0)
+    return boxes
+
+def face_detect(images):
+    detector = face_detection.FaceAlignment(face_detection.LandmarksType._2D, 
+                                            flip_input=False, device=device)
+
+    batch_size = args.face_det_batch_size
+    
+    while 1:
+        predictions = []
+        try:
+            for i in tqdm(range(0, len(images), batch_size)):
+                predictions.extend(detector.get_detections_for_batch(np.array(images[i:i + batch_size])))
+        except RuntimeError:
+            if batch_size == 1: 
+                raise RuntimeError('Image too big to run face detection on GPU. Please use the --resize_factor argument')
+            batch_size //= 2
+            print('Recovering from OOM error; New batch size: {}'.format(batch_size))
+            continue
+        break
+
+    results = []
+    pady1, pady2, padx1, padx2 = args.pads
+    for rect, image in zip(predictions, images):
+        if rect is None:
+            cv2.imwrite('temp/faulty_frame.jpg', image) # check this frame where the face was not detected.
+            raise ValueError('Face not detected! Ensure the video contains a face in all the frames.')
+
+        y1 = max(0, rect[1] - pady1)
+        y2 = min(image.shape[0], rect[3] + pady2)
+        x1 = max(0, rect[0] - padx1)
+        x2 = min(image.shape[1], rect[2] + padx2)
+        
+        results.append([x1, y1, x2, y2])
+
+    boxes = np.array(results)
+    if not args.nosmooth: boxes = get_smoothened_boxes(boxes, T=5)
+    results = [[image[y1: y2, x1:x2], (y1, y2, x1, x2)] for image, (x1, y1, x2, y2) in zip(images, boxes)]
+
+    del detector
+    return results 
+
+def datagen(frames, mels):
+    img_batch, mel_batch, frame_batch, coords_batch = [], [], [], []
+
+    if args.box[0] == -1:
+        if not args.static:
+            face_det_results = face_detect(frames) # BGR2RGB for CNN face detection
+        else:
+            face_det_results = face_detect([frames[0]])
+    else:
+        print('Using the specified bounding box instead of face detection...')
+        y1, y2, x1, x2 = args.box
+        face_det_results = [[f[y1: y2, x1:x2], (y1, y2, x1, x2)] for f in frames]
+
+    for i, m in enumerate(mels):
+        idx = 0 if args.static else i%len(frames)
+        frame_to_save = frames[idx].copy()
+        face, coords = face_det_results[idx].copy()
+
+        face = cv2.resize(face, (args.img_size, args.img_size))
+            
+        img_batch.append(face)
+        mel_batch.append(m)
+        frame_batch.append(frame_to_save)
+        coords_batch.append(coords)
+
+        if len(img_batch) >= args.wav2lip_batch_size:
+            img_batch, mel_batch = np.asarray(img_batch), np.asarray(mel_batch)
+
+            img_masked = img_batch.copy()
+            img_masked[:, args.img_size//2:] = 0
+
+            img_batch = np.concatenate((img_masked, img_batch), axis=3) / 255.
+            mel_batch = np.reshape(mel_batch, [len(mel_batch), mel_batch.shape[1], mel_batch.shape[2], 1])
+
+            yield img_batch, mel_batch, frame_batch, coords_batch
+            img_batch, mel_batch, frame_batch, coords_batch = [], [], [], []
+
+    if len(img_batch) > 0:
+        img_batch, mel_batch = np.asarray(img_batch), np.asarray(mel_batch)
+
+        img_masked = img_batch.copy()
+        img_masked[:, args.img_size//2:] = 0
+
+        img_batch = np.concatenate((img_masked, img_batch), axis=3) / 255.
+        mel_batch = np.reshape(mel_batch, [len(mel_batch), mel_batch.shape[1], mel_batch.shape[2], 1])
+
+        yield img_batch, mel_batch, frame_batch, coords_batch
+
+mel_step_size = 16
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+print('Using {} for inference.'.format(device))
+
+def _load(checkpoint_path):
+    if device == 'cuda':
+        checkpoint = torch.load(checkpoint_path, weights_only=True)
+    else:
+        checkpoint = torch.load(checkpoint_path,
+                                map_location=lambda storage, loc: storage)
+    return checkpoint
+
+# Replace the load_model function (around line 162-179) with:
+def load_model(path):
+    model = Wav2Lip()
+    print("Loading checkpoint from: {}".format(path))
+    if torch.cuda.is_available():
+        checkpoint = torch.load(path, weights_only=True)
+    else:
+        checkpoint = torch.load(path, map_location=lambda storage, loc: storage, weights_only=True)
+    if isinstance(checkpoint, dict) and "state_dict" in checkpoint:
+        s = checkpoint["state_dict"]
+    else:
+        s = checkpoint
+    # Strip 'module.' prefix from state_dict keys
+    new_s = {k.replace("module.", ""): v for k, v in s.items()}
+    model.load_state_dict(new_s)
+    model = model.to(device)
+    model.eval()
+    return model
+
+def main():
+    if not os.path.isfile(args.face):
+        raise ValueError('--face argument must be a valid path to video/image file')
+
+    elif args.face.split('.')[1] in ['jpg', 'png', 'jpeg']:
+        full_frames = [cv2.imread(args.face)]
+        fps = args.fps
+
+    else:
+        video_stream = cv2.VideoCapture(args.face)
+        fps = video_stream.get(cv2.CAP_PROP_FPS)
+
+        print('Reading video frames...')
+
+        full_frames = []
+        while 1:
+            still_reading, frame = video_stream.read()
+            if not still_reading:
+                video_stream.release()
+                break
+            if args.resize_factor > 1:
+                frame = cv2.resize(frame, (frame.shape[1]//args.resize_factor, frame.shape[0]//args.resize_factor))
+
+            if args.rotate:
+                frame = cv2.rotate(frame, cv2.cv2.ROTATE_90_CLOCKWISE)
+
+            y1, y2, x1, x2 = args.crop
+            if x2 == -1: x2 = frame.shape[1]
+            if y2 == -1: y2 = frame.shape[0]
+
+            frame = frame[y1:y2, x1:x2]
+
+            full_frames.append(frame)
+
+    print ("Number of frames available for inference: "+str(len(full_frames)))
+
+    if not args.audio.endswith('.wav'):
+        print('Extracting raw audio...')
+        command = 'ffmpeg -y -i {} -strict -2 {}'.format(args.audio, 'temp/temp.wav')
+
+        subprocess.call(command, shell=True)
+        args.audio = 'temp/temp.wav'
+
+    wav = audio.load_wav(args.audio, 16000)
+    mel = audio.melspectrogram(wav)
+    print(mel.shape)
+
+    if np.isnan(mel.reshape(-1)).sum() > 0:
+        raise ValueError('Mel contains nan! Using a TTS voice? Add a small epsilon noise to the wav file and try again')
+
+    mel_chunks = []
+    mel_idx_multiplier = 80./fps 
+    i = 0
+    while 1:
+        start_idx = int(i * mel_idx_multiplier)
+        if start_idx + mel_step_size > len(mel[0]):
+            mel_chunks.append(mel[:, len(mel[0]) - mel_step_size:])
+            break
+        mel_chunks.append(mel[:, start_idx : start_idx + mel_step_size])
+        i += 1
+
+    print("Length of mel chunks: {}".format(len(mel_chunks)))
+
+    full_frames = full_frames[:len(mel_chunks)]
+
+    batch_size = args.wav2lip_batch_size
+    gen = datagen(full_frames.copy(), mel_chunks)
+
+    for i, (img_batch, mel_batch, frames, coords) in enumerate(tqdm(gen, 
+                                            total=int(np.ceil(float(len(mel_chunks))/batch_size)))):
+        if i == 0:
+            model = load_model(args.checkpoint_path)
+            print ("Model loaded")
+
+            frame_h, frame_w = full_frames[0].shape[:-1]
+            out = cv2.VideoWriter('temp/result.avi', 
+                                    cv2.VideoWriter_fourcc(*'DIVX'), fps, (frame_w, frame_h))
+
+        img_batch = torch.FloatTensor(np.transpose(img_batch, (0, 3, 1, 2))).to(device)
+        mel_batch = torch.FloatTensor(np.transpose(mel_batch, (0, 3, 1, 2))).to(device)
+
+        with torch.no_grad():
+            pred = model(mel_batch, img_batch)
+
+        pred = pred.cpu().numpy().transpose(0, 2, 3, 1) * 255.
+        
+        for p, f, c in zip(pred, frames, coords):
+            y1, y2, x1, x2 = c
+            p = cv2.resize(p.astype(np.uint8), (x2 - x1, y2 - y1))
+
+            f[y1:y2, x1:x2] = p
+            out.write(f)
+
+    out.release()
+
+    command = 'ffmpeg -y -i {} -i {} -strict -2 -q:v 1 {}'.format(args.audio, 'temp/result.avi', args.outfile)
+    subprocess.call(command, shell=platform.system() != 'Windows')
+
+if __name__ == '__main__':
+    main()
