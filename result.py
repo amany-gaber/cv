@@ -13,6 +13,24 @@ import platform
 
 
 
+fastapi==0.115.0
+uvicorn==0.32.0
+gunicorn==23.0.0
+pydantic==2.9.2
+librosa==0.10.2
+numpy==1.26.4
+opencv-python==4.10.0.84
+opencv-contrib-python==4.10.0.84
+torch==2.4.1
+torchvision==0.19.1
+python-multipart==0.0.12
+#numpy==1.17.1
+
+scipy
+sys
+random
+string
+
 
 
 
